@@ -8,4 +8,6 @@ public interface LoanApplicationService {
 
     public void saveApplication(LoanApplication application);
     public LoanApplication getApplicationById(Long id);
+
+    void updateApplication(LoanApplication application);
 }

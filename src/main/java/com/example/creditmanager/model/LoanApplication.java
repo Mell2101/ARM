@@ -24,6 +24,10 @@ public class LoanApplication {
     private String organization;
     private double loanAmount;
 
+    private String status;
+    private double approvedLoanAmount;
+    private int loanTerm;
+
     public Long getId() {
         return id;
     }
@@ -118,5 +122,29 @@ public class LoanApplication {
 
     public void setLoanAmount(double loanAmount) {
         this.loanAmount = loanAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getApprovedLoanAmount() {
+        return approvedLoanAmount;
+    }
+
+    public void setApprovedLoanAmount(double approvedLoanAmount) {
+        this.approvedLoanAmount = approvedLoanAmount;
+    }
+
+    public int getLoanTerm() {
+        return loanTerm;
+    }
+
+    public void setLoanTerm(int loanTerm) {
+        this.loanTerm = loanTerm;
     }
 }
