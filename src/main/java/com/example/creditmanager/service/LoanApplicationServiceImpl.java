@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class LoanApplicationServiceImpl implements LoanApplicationService {
     @Autowired
@@ -26,4 +28,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     public void updateApplication(LoanApplication application) {
         loanApplicationDao.update(application);
     }
+
+    public List<LoanApplication> getAllLoanApplications() {
+        return loanApplicationDao.getAll();
+    }
+
 }

@@ -1,11 +1,12 @@
 package com.example.creditmanager.controller;
 
-import com.example.creditmanager.model.Client;
-import com.example.creditmanager.service.ClientService;
+import com.example.creditmanager.model.LoanApplication;
+import com.example.creditmanager.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -13,12 +14,14 @@ import java.util.List;
 public class ClientController {
 
     @Autowired
-    private ClientService clientService;
+    private LoanApplicationService loanApplicationService;
 
     @GetMapping("/clients")
     public String listClients(Model model) {
-        List<Client> clients = clientService.getAllClients();
-        model.addAttribute("clients", clients);
-        return "clientList"; // JSP page name
+        List<LoanApplication> applications = loanApplicationService.getAllLoanApplications();
+        model.addAttribute("applications", applications);
+        return "clientList";
     }
+
+
 }

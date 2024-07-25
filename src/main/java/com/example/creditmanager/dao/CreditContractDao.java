@@ -6,8 +6,8 @@ import java.util.List;
 
 
 public interface CreditContractDao {
-    void save(CreditContract credit);
 
+    void save(CreditContract credit);
     CreditContract getById(Long id);
     List<CreditContract> getAll();
     void update(CreditContract contract);

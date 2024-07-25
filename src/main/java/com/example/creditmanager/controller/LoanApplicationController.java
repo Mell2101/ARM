@@ -27,6 +27,8 @@ public class LoanApplicationController {
         return "loanApplication";
     }
 
+
+
     @PostMapping("/submitApplication")
     public String submitApplication(
             @RequestParam("firstName") String firstName,
@@ -80,6 +82,8 @@ public class LoanApplicationController {
 
         return "applicationSuccess"; // Name of the JSP page for application confirmation
     }
+
+
 
     private LoanDecision determineLoanDecision() {
         Random random = new Random();

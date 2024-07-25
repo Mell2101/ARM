@@ -13,7 +13,13 @@
         <spring.version>5.3.25</spring.version>
         <hibernate.version>5.6.14.Final</hibernate.version>
         <postgresql.version>42.5.1</postgresql.version>
+        <maven.compiler.source>10</maven.compiler.source>
+        <maven.compiler.target>10</maven.compiler.target>
     </properties>
+
+
+
+
 
     <dependencies>
         <!-- Spring MVC -->

@@ -49,7 +49,8 @@ public class LoanApplicationDaoImpl implements LoanApplicationDao {
         Session session = sessionFactory.openSession();
         List<LoanApplication> applications = null;
         try {
-            applications = session.createQuery("from LoanApplication", LoanApplication.class).list();
+            applications = session.createQuery(
+                    "select distinct la from LoanApplication la left join fetch la.contract", LoanApplication.class).list();
         } finally {
             session.close();
         }
@@ -92,4 +93,6 @@ public class LoanApplicationDaoImpl implements LoanApplicationDao {
 
 
     }
+
+
 }

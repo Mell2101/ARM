@@ -25,6 +25,17 @@ public class LoanApplication {
     @Column(name = "loanTerm", nullable = false)
     private int loanTerm;
 
+    @OneToOne(mappedBy = "loanApplication", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CreditContract contract;
+
+    public CreditContract getContract() {
+        return contract;
+    }
+
+    public void setContract(CreditContract contract) {
+        this.contract = contract;
+    }
+
     public Long getId() {
         return id;
     }

@@ -2,44 +2,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Client List</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>Clients</title>
 </head>
 <body>
-    <h1>Client List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="client" items="${clients}">
-                <tr>
-                    <td>${client.id}</td>
-                    <td>${client.name}</td>
-                    <td>${client.email}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+<h1>Clients List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Loan Amount</th>
+        <th>Approved Loan Amount</th>
+        <th>Loan Term</th>
+        <th>Status</th>
+        <th>Contract Signed</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="application" items="${applications}">
+        <tr>
+            <td>${application.id}</td>
+            <td>${application.firstName}</td>
+            <td>${application.lastName}</td>
+            <td>${application.loanAmount}</td>
+            <td>${application.approvedLoanAmount}</td>
+            <td>${application.loanTerm}</td>
+            <td>${application.status}</td>
+            <td>${application.contract != null && application.contract.signed ? 'Yes' : 'No'}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
+<h1>Search Clients</h1>
+<form action="/search" method="get">
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone">
+    <br>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName">
+    <br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName">
+    <br>
+    <label for="passport">Passport:</label>
+    <input type="text" id="passport" name="passport">
+    <br>
+    <button type="submit">Search</button>
+</form>
 </body>
 </html>
