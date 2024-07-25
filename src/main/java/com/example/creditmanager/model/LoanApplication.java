@@ -1,16 +1,11 @@
 package com.example.creditmanager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-
 public class LoanApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private String firstName;
     private String lastName;
@@ -25,7 +20,9 @@ public class LoanApplication {
     private double loanAmount;
 
     private String status;
+    @Column(name = "approvedLoanAmount", nullable = false)
     private double approvedLoanAmount;
+    @Column(name = "loanTerm", nullable = false)
     private int loanTerm;
 
     public Long getId() {

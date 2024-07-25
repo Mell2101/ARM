@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,10 @@
     <h1>Loan Application Status</h1>
     <p>Thank you for your application! We have processed your loan application.</p>
     <p>Below is the information about your application:</p>
+
+    <c:if test="${not empty contractId}">
+        <p>Your credit contract ID is: ${contractId}</p>
+    </c:if>
 
     <table border="1">
         <tr>
@@ -59,7 +64,14 @@
         <tr>
             <th>Status</th>
             <td>${application.status}</td>
+            <c:if test="${application.status == 'Approved'}">
+                    <form action="signContract" method="post">
+                        <input type="hidden" name="contractId" value="${contractId}">
+                        <button type="submit">Sign Contract</button>
+                    </form>
+            </c:if>
         </tr>
+
         <tr>
             <th>Approved Loan Amount</th>
             <td>${application.approvedLoanAmount}</td>
@@ -69,6 +81,7 @@
             <td>${application.loanTerm}</td>
         </tr>
     </table>
+
 
     <p>A manager will contact you shortly to clarify details.</p>
 

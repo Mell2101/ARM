@@ -1,7 +1,9 @@
 package com.example.creditmanager.controller;
 
 import com.example.creditmanager.dto.LoanDecision;
+import com.example.creditmanager.model.CreditContract;
 import com.example.creditmanager.model.LoanApplication;
+import com.example.creditmanager.service.CreditContractService;
 import com.example.creditmanager.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ import java.util.Random;
 public class LoanApplicationController {
     @Autowired
     private LoanApplicationService loanApplicationService;
+
+    @Autowired
+    private CreditContractService creditContractService;
 
     @GetMapping("/apply")
     public String showApplicationForm() {
@@ -53,6 +58,7 @@ public class LoanApplicationController {
         // Save the application
         loanApplicationService.saveApplication(application);
 
+
         // Determine loan decision
         LoanDecision decision = determineLoanDecision();
         application.setStatus(decision.getStatus());
@@ -63,6 +69,15 @@ public class LoanApplicationController {
         loanApplicationService.updateApplication(application);
 
         model.addAttribute("application", application);
+
+        if ("Approved".equals(application.getStatus())) {
+            CreditContract contract = new CreditContract();
+            contract.setLoanApplication(application);
+            contract.setSigned(false);
+            creditContractService.createCreditContract(contract);
+            model.addAttribute("contractId", contract.getId());
+        }
+
         return "applicationSuccess"; // Name of the JSP page for application confirmation
     }
 
