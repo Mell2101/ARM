@@ -14,7 +14,6 @@ public class Client {
     private String name;
     private String email;
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

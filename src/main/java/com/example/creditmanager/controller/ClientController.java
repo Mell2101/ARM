@@ -39,6 +39,6 @@ public class ClientController {
 
         List<LoanApplication> results = loanApplicationService.search(phone, firstName, lastName, passport);
         model.addAttribute("applications", results);
-        return "clientList"; // Название JSP страницы для отображения результатов поиска
+        return "clientList";
     }
 }

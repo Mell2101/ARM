@@ -22,30 +22,27 @@ public class CreditContractController {
     public String signContract(
             @RequestParam(value = "contractId", required = false) Long contractId, Model model) {
         try {
-            // Проверка на null и обработка ошибки
+
             if (contractId == null) {
                 model.addAttribute("error", "Contract ID is missing.");
-                return "errorPage"; // Страница с ошибкой
+                return "errorPage";
             }
 
-            // Подписание контракта
             creditContractService.signCreditContract(contractId);
 
-            // Поиск контракта
             CreditContract contract = creditContractService.findById(contractId);
             if (contract == null) {
                 model.addAttribute("error", "Contract not found.");
-                return "errorPage"; // Страница с ошибкой
+                return "errorPage";
             }
 
             model.addAttribute("contract", contract);
 
-            return "contractSigned"; // Страница подтверждения подписания контракта
-
+            return "contractSigned";
         } catch (Exception e) {
-            // Логирование и обработка ошибок
+
             model.addAttribute("error", "An error occurred: " + e.getMessage());
-            return "errorPage"; // Страница с ошибкой
+            return "errorPage";
         }
     }
 
@@ -63,7 +60,7 @@ public class CreditContractController {
         }
 
         model.addAttribute("contracts", contracts);
-        return "creditContractList"; // Название JSP страницы для отображения результатов
+        return "creditContractList";
     }
 
 

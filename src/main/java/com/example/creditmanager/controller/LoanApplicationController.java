@@ -28,8 +28,6 @@ public class LoanApplicationController {
         return "loanApplication";
     }
 
-
-
     @PostMapping("/submitApplication")
     public String submitApplication(
             @RequestParam("firstName") String firstName,
@@ -58,17 +56,16 @@ public class LoanApplicationController {
         application.setOrganization(organization);
         application.setLoanAmount(loanAmount);
 
-        // Save the application
+
         loanApplicationService.saveApplication(application);
 
 
-        // Determine loan decision
         LoanDecision decision = determineLoanDecision();
         application.setStatus(decision.getStatus());
         application.setApprovedLoanAmount(decision.getApprovedLoanAmount());
         application.setLoanTerm(decision.getLoanTerm());
 
-        // Save the decision
+
         loanApplicationService.updateApplication(application);
 
         model.addAttribute("application", application);
@@ -81,7 +78,7 @@ public class LoanApplicationController {
             model.addAttribute("contractId", contract.getId());
         }
 
-        return "applicationSuccess"; // Name of the JSP page for application confirmation
+        return "applicationSuccess";
     }
 
 
@@ -89,8 +86,8 @@ public class LoanApplicationController {
     private LoanDecision determineLoanDecision() {
         Random random = new Random();
         boolean isApproved = random.nextBoolean();
-        int loanTerm = random.nextInt(365 * 12) + 1; // Random term between 1 and 12 months in days
-        double approvedAmount = isApproved ? random.nextDouble() * 100000 : 0; // Random amount if approved
+        int loanTerm = random.nextInt(365 * 12) + 1;
+        double approvedAmount = isApproved ? random.nextDouble() * 100000 : 0;
 
         LoanDecision decision = new LoanDecision();
         decision.setStatus(isApproved ? "Approved" : "Not Approved");
@@ -113,7 +110,7 @@ public class LoanApplicationController {
         }
 
         model.addAttribute("applications", applications);
-        return "clientList"; // Название JSP страницы для отображения результатов
+        return "clientList";
     }
 
 }
