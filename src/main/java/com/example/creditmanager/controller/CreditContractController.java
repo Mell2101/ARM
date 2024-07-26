@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class CreditContractController {
 
@@ -18,8 +20,7 @@ public class CreditContractController {
 
     @PostMapping("/signContract")
     public String signContract(
-            @RequestParam(value = "contractId", required = false, defaultValue = "1") Long contractId, Model model) {
-
+            @RequestParam(value = "contractId", required = false) Long contractId, Model model) {
         try {
             // Проверка на null и обработка ошибки
             if (contractId == null) {
@@ -46,6 +47,23 @@ public class CreditContractController {
             model.addAttribute("error", "An error occurred: " + e.getMessage());
             return "errorPage"; // Страница с ошибкой
         }
+    }
+
+    @GetMapping("/creditContractBySigned")
+    public String applicationsByStatus(
+            @RequestParam(value = "signed", required = false) Boolean signed,
+            Model model) {
+
+        List<CreditContract> contracts;
+        if (signed ) {
+            contracts = creditContractService.getCreditBySigned(signed);
+        }
+        else {
+            contracts = creditContractService.getAllCreditContract();
+        }
+
+        model.addAttribute("contracts", contracts);
+        return "creditContractList"; // Название JSP страницы для отображения результатов
     }
 
 

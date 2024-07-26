@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
+
 @Service
 public class CreditContractServiceImpl implements CreditContractService{
     @Autowired
@@ -25,7 +27,7 @@ public class CreditContractServiceImpl implements CreditContractService{
         if (contract != null ) {
             contract.setSigned(true);
             contract.setSigningDate(new Date());
-            creditContractDao.save(contract);
+            creditContractDao.update(contract);
         }
     }
 
@@ -34,5 +36,13 @@ public class CreditContractServiceImpl implements CreditContractService{
         return creditContractDao.getById(contractId);
     }
 
-    
+    @Override
+    public List<CreditContract> getCreditBySigned(Boolean signed) {
+        return creditContractDao.getBySigned(signed);
+    }
+
+    @Override
+    public List<CreditContract> getAllCreditContract() {
+        return creditContractDao.getAll();
+    }
 }

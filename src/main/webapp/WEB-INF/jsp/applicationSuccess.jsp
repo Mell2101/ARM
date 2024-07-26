@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Loan Application Status</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Loan Application Status</h1>
@@ -85,6 +84,6 @@
 
     <p>A manager will contact you shortly to clarify details.</p>
 
-    <a href="/">Return to the homepage</a>
+    <a href="/credit-manager">Return to the homepage</a>
 </body>
 </html>

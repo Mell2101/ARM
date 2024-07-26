@@ -12,5 +12,7 @@
     <p>Loan Term: ${contract.loanApplication.loanTerm} days</p>
     <p>Signing Date: ${contract.signingDate}</p>
     <p>Signed: ${contract.signed ? 'Yes' : 'No'}</p>
+
+    <a href="/credit-manager">Return to the homepage</a>
 </body>
 </html>

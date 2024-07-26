@@ -14,4 +14,5 @@ public interface LoanApplicationService {
     void updateApplication(LoanApplication application);
     public List<LoanApplication> getAllLoanApplications();
     public List<LoanApplication> search(String phone, String firstName, String lastName, String passport);
+    public List<LoanApplication> getApplicationsByStatus(String status);
 }

@@ -135,4 +135,21 @@ public class LoanApplicationDaoImpl implements LoanApplicationDao {
         }
         return applications;
     }
+
+    @Override
+    public List<LoanApplication> getByStatus(String status) {
+        Session session = sessionFactory.openSession();
+        List<LoanApplication> applications = null;
+        try {
+            String hql = "FROM LoanApplication WHERE status = :status";
+            applications = session.createQuery(hql, LoanApplication.class)
+                    .setParameter("status", status)
+                    .list();
+        } finally {
+            session.close();
+        }
+        return applications;
+    }
+
+
 }

@@ -42,4 +42,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         return loanApplicationDao.search(phone, firstName, lastName, passport);
     }
 
+    public List<LoanApplication> getApplicationsByStatus(String status) {
+        return loanApplicationDao.getByStatus(status);
+    }
 }

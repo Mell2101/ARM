@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -97,6 +98,22 @@ public class LoanApplicationController {
         decision.setLoanTerm(loanTerm);
 
         return decision;
+    }
+
+    @GetMapping("/applicationsByStatus")
+    public String applicationsByStatus(
+            @RequestParam(value = "status", required = false) String status,
+            Model model) {
+
+        List<LoanApplication> applications;
+        if (status != null && !status.isEmpty()) {
+            applications = loanApplicationService.getApplicationsByStatus(status);
+        } else {
+            applications = loanApplicationService.getAllLoanApplications();
+        }
+
+        model.addAttribute("applications", applications);
+        return "clientList"; // Название JSP страницы для отображения результатов
     }
 
 }

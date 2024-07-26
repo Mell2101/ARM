@@ -1,6 +1,7 @@
 package com.example.creditmanager.dao;
 
 import com.example.creditmanager.model.CreditContract;
+import com.example.creditmanager.model.LoanApplication;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -89,5 +90,20 @@ public class CreditContractDaoImpl implements CreditContractDao {
             session.close();
         }
         return contract;
+    }
+
+    @Override
+    public List<CreditContract> getBySigned(Boolean signed) {
+        Session session = sessionFactory.openSession();
+        List<CreditContract> credit = null;
+        try {
+            String hql = "FROM CreditContract WHERE signed = :signed";
+            credit = session.createQuery(hql, CreditContract.class)
+                    .setParameter("signed", signed)
+                    .list();
+        } finally {
+            session.close();
+        }
+        return credit;
     }
 }
