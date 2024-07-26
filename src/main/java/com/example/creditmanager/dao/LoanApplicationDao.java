@@ -8,5 +8,5 @@ public interface LoanApplicationDao {
     List<LoanApplication> getAll();
     void update(LoanApplication application);
     void delete(Long id);
-
+    public List<LoanApplication> search(String phone, String firstName, String lastName, String passport);
 }

@@ -5,6 +5,7 @@ import com.example.creditmanager.model.LoanApplication;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -94,5 +95,44 @@ public class LoanApplicationDaoImpl implements LoanApplicationDao {
 
     }
 
+    @Override
+    public List<LoanApplication> search(String phone, String firstName, String lastName, String passport) {
+        Session session = sessionFactory.openSession();
+        List<LoanApplication> applications = null;
+        try {
+            String queryStr = "from LoanApplication where 1=1";
+            if (firstName != null && !firstName.isEmpty()) {
+                queryStr += " and firstName = :firstName";
+            }
+            if (lastName != null && !lastName.isEmpty()) {
+                queryStr += " and lastName = :lastName";
+            }
+            if (phone != null && !phone.isEmpty()) {
+                queryStr += " and contactPhone = :phone";
+            }
+            if (passport != null && !passport.isEmpty()) {
+                queryStr += " and passport = :passport";
+            }
 
+            Query<LoanApplication> query = session.createQuery(queryStr, LoanApplication.class);
+
+            if (firstName != null && !firstName.isEmpty()) {
+                query.setParameter("firstName", firstName);
+            }
+            if (lastName != null && !lastName.isEmpty()) {
+                query.setParameter("lastName", lastName);
+            }
+            if (phone != null && !phone.isEmpty()) {
+                query.setParameter("phone", phone);
+            }
+            if (passport != null && !passport.isEmpty()) {
+                query.setParameter("passport", passport);
+            }
+
+            applications = query.list();
+        } finally {
+            session.close();
+        }
+        return applications;
+    }
 }

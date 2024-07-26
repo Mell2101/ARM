@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class LoanApplicationServiceImpl implements LoanApplicationService {
+
     @Autowired
     private LoanApplicationDao loanApplicationDao;
 
@@ -29,8 +30,16 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         loanApplicationDao.update(application);
     }
 
+    @Transactional
+    @Override
     public List<LoanApplication> getAllLoanApplications() {
         return loanApplicationDao.getAll();
+    }
+
+    @Transactional
+    @Override
+    public List<LoanApplication> search(String phone, String firstName, String lastName, String passport) {
+        return loanApplicationDao.search(phone, firstName, lastName, passport);
     }
 
 }
