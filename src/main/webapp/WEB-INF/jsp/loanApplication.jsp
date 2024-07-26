@@ -80,5 +80,6 @@
 
         <input type="submit" value="Submit Application" />
     </form>
+    <a href="/credit-manager">Return to the homepage</a>
 </body>
 </html>
